@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    class Class1
+    internal class Class1
     {
+
     }
 }
