@@ -16,6 +16,7 @@ namespace Web.PlatForms
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ControllerBuilder.Current.DefaultNamespaces.Add("Web.PlatForms.Controllers.*");
 
 
         }
