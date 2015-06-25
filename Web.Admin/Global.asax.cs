@@ -13,6 +13,8 @@ namespace Web.Admin
     {
         protected void Application_Start()
         {
+
+
             //Log4加载
            // log4net.Config.XmlConfigurator.Configure();
            
@@ -23,7 +25,7 @@ namespace Web.Admin
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            //
             ControllerBuilder.Current.DefaultNamespaces.Add("Web.Admin.Controllers.*");
 
  
