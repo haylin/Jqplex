@@ -4,8 +4,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Common;
+
 using Entity;
+using log4net.Repository.Hierarchy;
+using Logger;
+using Logger = log4net.Repository.Hierarchy.Logger;
 
 namespace Web.Admin.Controllers
 {
@@ -38,8 +41,9 @@ namespace Web.Admin.Controllers
             catch (Exception ex)
             {
                 msg = "fild";
-               LoggerHelper.Info1("一般性错误12133",ex);
-                LoggerHelper.WriteLog("ddd",ex);
+               LogHelper.Info3("你好","127.0.0.1","一般性问题",ex);
+               //LoggerHelper.Info1("一般性错误12133",ex);
+               // LoggerHelper.WriteLog("ddd",ex);
                
            
             }

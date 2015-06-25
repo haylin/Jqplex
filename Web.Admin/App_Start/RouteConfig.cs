@@ -17,7 +17,7 @@ namespace Web.Admin
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces:new string[] { "Web.PlatForms.Controllers" }
+                namespaces:new string[] { "Web.Admin.Controllers" }
             );
         }
     }
