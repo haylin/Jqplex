@@ -14,28 +14,12 @@ namespace Logger.Layout
     public class MyPatternLayout : LayoutSkeleton
     {
         #region copy from PatternLayout
-        /// <summary>
-        /// Wrapper class used to map converter names to converter types
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Pattern converter info class used during configuration to
-        /// pass to the <see cref="M:log4net.Layout.PatternLayout.AddConverter(log4net.Layout.PatternLayout.ConverterInfo)" />
-        /// method.
-        /// </para>
-        /// </remarks>
+
         public sealed class ConverterInfo
         {
             private string m_name;
             private Type m_type;
-            /// <summary>
-            /// Gets or sets the name of the conversion pattern
-            /// </summary>
-            /// <remarks>
-            /// <para>
-            /// The name of the pattern in the format string
-            /// </para>
-            /// </remarks>
+       
             public string Name
             {
                 get
@@ -47,15 +31,7 @@ namespace Logger.Layout
                     this.m_name = value;
                 }
             }
-            /// <summary>
-            /// Gets or sets the type of the converter
-            /// </summary>
-            /// <remarks>
-            /// <para>
-            /// The value specified must extend the 
-            /// <see cref="T:log4net.Util.PatternConverter" /> type.
-            /// </para>
-            /// </remarks>
+       
             public Type Type
             {
                 get
@@ -68,58 +44,19 @@ namespace Logger.Layout
                 }
             }
         }
-        /// <summary>
-        /// Default pattern string for log output. 
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Default pattern string for log output. 
-        /// Currently set to the string <b>"%message%newline"</b> 
-        /// which just prints the application supplied message. 
-        /// </para>
-        /// </remarks>
+     
         public const string DefaultConversionPattern = "%message%newline";
-        /// <summary>
-        /// A detailed conversion pattern
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// A conversion pattern which includes Time, Thread, Logger, and Nested Context.
-        /// Current value is <b>%timestamp [%thread] %level %logger %ndc - %message%newline</b>.
-        /// </para>
-        /// </remarks>
+       
         public const string DetailConversionPattern = "%timestamp [%thread] %level %logger %ndc - %message%newline";
-        /// <summary>
-        /// Internal map of converter identifiers to converter types.
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// This static map is overridden by the m_converterRegistry instance map
-        /// </para>
-        /// </remarks>
+      
         private static Hashtable s_globalRulesRegistry;
-        /// <summary>
-        /// the pattern
-        /// </summary>
+        
         private string m_pattern;
-        /// <summary>
-        /// the head of the pattern converter chain
-        /// </summary>
+       
         private PatternConverter m_head;
-        /// <summary>
-        /// patterns defined on this PatternLayout only
-        /// </summary>
+     
         private Hashtable m_instanceRulesRegistry = new Hashtable();
-        /// <summary>
-        /// The pattern formatting string
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// The <b>ConversionPattern</b> option. This is the string which
-        /// controls formatting and consists of a mix of literal content and
-        /// conversion specifiers.
-        /// </para>
-        /// </remarks>
+   
         public string ConversionPattern
         {
             get
@@ -139,43 +76,12 @@ namespace Logger.Layout
             MyPatternLayout.s_globalRulesRegistry.Add("user_ip", typeof(Logger.Layout.Pattern.UserIPPatternConverter));
             MyPatternLayout.s_globalRulesRegistry.Add("log_date", typeof(Logger.Layout.Pattern.RecordTimePatternConverter));
         }
-        /// <summary>
-        /// Constructs a PatternLayout using the DefaultConversionPattern
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// The default pattern just produces the application supplied message.
-        /// </para>
-        /// <para>
-        /// Note to Inheritors: This constructor calls the virtual method
-        /// <see cref="M:log4net.Layout.PatternLayout.CreatePatternParser(System.String)" />. If you override this method be
-        /// aware that it will be called before your is called constructor.
-        /// </para>
-        /// <para>
-        /// As per the <see cref="T:log4net.Core.IOptionHandler" /> contract the <see cref="M:log4net.Layout.PatternLayout.ActivateOptions" />
-        /// method must be called after the properties on this object have been
-        /// configured.
-        /// </para>
-        /// </remarks>
+
         public MyPatternLayout()
             : this("%message%newline")
         {
         }
-        /// <summary>
-        /// Constructs a PatternLayout using the supplied conversion pattern
-        /// </summary>
-        /// <param name="pattern">the pattern to use</param>
-        /// <remarks>
-        /// <para>
-        /// Note to Inheritors: This constructor calls the virtual method
-        /// <see cref="M:log4net.Layout.PatternLayout.CreatePatternParser(System.String)" />. If you override this method be
-        /// aware that it will be called before your is called constructor.
-        /// </para>
-        /// <para>
-        /// When using this constructor the <see cref="M:log4net.Layout.PatternLayout.ActivateOptions" /> method 
-        /// need not be called. This may not be the case when using a subclass.
-        /// </para>
-        /// </remarks>
+
         public MyPatternLayout(string pattern)
         {
             this.IgnoresException = true;
@@ -186,17 +92,7 @@ namespace Logger.Layout
             }
             this.ActivateOptions();
         }
-        /// <summary>
-        /// Create the pattern parser instance
-        /// </summary>
-        /// <param name="pattern">the pattern to parse</param>
-        /// <returns>The <see cref="T:log4net.Util.PatternParser" /> that will format the event</returns>
-        /// <remarks>
-        /// <para>
-        /// Creates the <see cref="T:log4net.Util.PatternParser" /> used to parse the conversion string. Sets the
-        /// global and instance rules on the <see cref="T:log4net.Util.PatternParser" />.
-        /// </para>
-        /// </remarks>
+
         protected virtual PatternParser CreatePatternParser(string pattern)
         {
             PatternParser patternParser = new PatternParser(pattern);
@@ -210,22 +106,7 @@ namespace Logger.Layout
             }
             return patternParser;
         }
-        /// <summary>
-        /// Initialize layout options
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// This is part of the <see cref="T:log4net.Core.IOptionHandler" /> delayed object
-        /// activation scheme. The <see cref="M:log4net.Layout.PatternLayout.ActivateOptions" /> method must 
-        /// be called on this object after the configuration properties have
-        /// been set. Until <see cref="M:log4net.Layout.PatternLayout.ActivateOptions" /> is called this
-        /// object is in an undefined state and must not be used. 
-        /// </para>
-        /// <para>
-        /// If any of the configuration properties are modified then 
-        /// <see cref="M:log4net.Layout.PatternLayout.ActivateOptions" /> must be called again.
-        /// </para>
-        /// </remarks>
+
         public override void ActivateOptions()
         {
             this.m_head = this.CreatePatternParser(this.m_pattern).Parse();
@@ -242,17 +123,7 @@ namespace Logger.Layout
                 }
             }
         }
-        /// <summary>
-        /// Produces a formatted string as specified by the conversion pattern.
-        /// </summary>
-        /// <param name="loggingEvent">the event being logged</param>
-        /// <param name="writer">The TextWriter to write the formatted event to</param>
-        /// <remarks>
-        /// <para>
-        /// Parse the <see cref="T:log4net.Core.LoggingEvent" /> using the patter format
-        /// specified in the <see cref="P:log4net.Layout.PatternLayout.ConversionPattern" /> property.
-        /// </para>
-        /// </remarks>
+
         public override void Format(TextWriter writer, LoggingEvent loggingEvent)
         {
             if (writer == null)
@@ -268,36 +139,12 @@ namespace Logger.Layout
                 patternConverter.Format(writer, loggingEvent);
             }
         }
-        /// <summary>
-        /// Add a converter to this PatternLayout
-        /// </summary>
-        /// <param name="converterInfo">the converter info</param>
-        /// <remarks>
-        /// <para>
-        /// This version of the method is used by the configurator.
-        /// Programmatic users should use the alternative <see cref="M:log4net.Layout.PatternLayout.AddConverter(System.String,System.Type)" /> method.
-        /// </para>
-        /// </remarks>
+
         public void AddConverter(PatternLayout.ConverterInfo converterInfo)
         {
             this.AddConverter(converterInfo.Name, converterInfo.Type);
         }
-        /// <summary>
-        /// Add a converter to this PatternLayout
-        /// </summary>
-        /// <param name="name">the name of the conversion pattern for this converter</param>
-        /// <param name="type">the type of the converter</param>
-        /// <remarks>
-        /// <para>
-        /// Add a named pattern converter to this instance. This
-        /// converter will be used in the formatting of the event.
-        /// This method must be called before <see cref="M:log4net.Layout.PatternLayout.ActivateOptions" />.
-        /// </para>
-        /// <para>
-        /// The <paramref name="type" /> specified must extend the 
-        /// <see cref="T:log4net.Util.PatternConverter" /> type.
-        /// </para>
-        /// </remarks>
+  
         public void AddConverter(string name, Type type)
         {
             if (name == null)

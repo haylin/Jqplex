@@ -28,7 +28,7 @@ namespace Logger.Extensions
             set { _message = value; }
         }
 
-        private DateTime _recordTime=DateTime.Now;
+        private DateTime _recordTime;
 
         public DateTime RecordTime
         {

@@ -103,6 +103,7 @@ namespace Logger
                 if (ex == null)
                     logger.Info(cpm);
                 else
+                   
                     logger.Info(cpm, ex);
             }
         }

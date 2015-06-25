@@ -18,9 +18,9 @@ namespace Web.Admin
             //Log4加载
            // log4net.Config.XmlConfigurator.Configure();
            
-            Logger.LogHelper.InitLogger(CustomLayout.LogConfiguration.GetConfigFile());
-           
+           // Logger.LogHelper.InitLogger(CustomLayout.LogConfiguration.GetConfigFile());
 
+            WebLogger.LogHelper.InitLogger(CustomLayout.LogConfiguration.GetConfigFile());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
