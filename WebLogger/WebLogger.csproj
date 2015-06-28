@@ -36,6 +36,12 @@
     <Reference Include="MongoDB">
       <HintPath>..\libary\MongoDB.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\libary\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\libary\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -51,6 +57,8 @@
     <Compile Include="LogMessage.cs" />
     <Compile Include="MongoCURD.cs" />
     <Compile Include="MongoDb.cs" />
+    <Compile Include="MongoHelper.cs" />
+    <Compile Include="PagerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MessagePatternConverter.cs" />
     <Compile Include="CustomPatternConverter.cs" />

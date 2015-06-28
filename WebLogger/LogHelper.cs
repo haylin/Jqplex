@@ -150,6 +150,7 @@ namespace WebLogger
                 log.Error(message);
                 var mongo =new  MongoCurd<LogMessage>();
                 mongo.Insert(message);
+                //MongoHelper.InsertOne(message);
             }
         }
 
