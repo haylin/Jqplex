@@ -30,7 +30,7 @@ namespace WebLogger
             this.AddConverter("Message", typeof(MessagePatternConverter));
             this.AddConverter("Exception", typeof(ExceptionPatternConverter));
             this.AddConverter("IpAddress", typeof(IpAddressPatternConverter));
-            this.AddConverter("UserID", typeof(UserIdPatternConverter));
+            this.AddConverter("UserId", typeof(UserIdPatternConverter));
             this.AddConverter("UserName", typeof(UserNamePatternConverter));
             this.AddConverter("SenderWay", typeof(SenderWayPatternConverter));
             this.AddConverter("State", typeof(StatePatternConverter));

@@ -42,15 +42,27 @@ namespace Web.Admin.Controllers
             }
             catch (Exception ex)
             {
+              
+              
                 msg = "fild";
               // LogHelper.Info3("你好","127.0.0.1","一般性问题",ex);
                //LoggerHelper.Info1("一般性错误12133",ex);
                // LoggerHelper.WriteLog("ddd",ex);
-                var logMessage=new LogMessage();
-                logMessage.RecordTime = DateTime.Now;
-                logMessage.UserId = 123456;
-                logMessage.Message = "你操作了";
-              WebLogger.LogHelper.SaveMessage(logMessage, LogHelper.LevelEnum.Eror);
+               // var logMessage=new LogMessage(WebLogger.LogHelper.LevelEnum.Eror.ToString(),"你操作了",ex.Message,"nihao",WebLogger.LogHelper.SenderEnum.EMail.ToString(),(int)WebLogger.LogHelper.LogerEnum.Normal);
+                //var t=   new LogMessage
+                //{
+                     
+                //     LevelName = LogHelper.LevelEnum.Eror.ToString(),
+                //     Message = "你做了什么",
+                //     Exception = ex.StackTrace,
+                //     SenderWay = LogHelper.SenderEnum.EMail.ToString(),
+                //     State =(int) LogHelper.LogerEnum.Normal,
+                //     UserId = 1,
+                //     IpAddress = IpAddressHelper.GetClientIp(),
+                //     RecordTime =DateTime.Now,//) DateTime.UtcNow.ToLocalTime(),
+                //};
+                string exp = ex.Message +"\n"+ ex.StackTrace;
+              WebLogger.LogHelper.SaveMessage("你好",exp,1,"admin", LogHelper.LevelEnum.Eror);
            
             }
 

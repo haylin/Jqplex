@@ -17,10 +17,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using log4net;
+using log4net.Core;
 
 
 namespace WebLogger
@@ -32,9 +34,10 @@ namespace WebLogger
 
         }
 
+       // public  static string LoggerName = ConfigurationManager.AppSettings["ClientName"];
         public static string LoggerName = "MisTxtLogger";
 
-        private static LogMessage message = null;
+        private static LogMessage _message = null;
 
         private static ILog _log;
 
@@ -42,8 +45,8 @@ namespace WebLogger
         {
             get
             {
-                string path = @"E:\PC_H5\Web.Admin\Config\Log4.config";
-                log4net.Config.XmlConfigurator.Configure(new FileInfo(path));
+                //string path = @"E:\PC_H5\Web.Admin\Config\Log4.config";
+                //log4net.Config.XmlConfigurator.Configure(new FileInfo(path));
 
                 if (_log == null)
                 {
@@ -57,7 +60,9 @@ namespace WebLogger
                     if (_log.Logger.Name != LoggerName)
                     {
                         _log = log4net.LogManager.GetLogger(LoggerName);
+                        _log.Logger.Repository.Threshold = Level.All;
                     }
+
                 }
 
                 return _log;
@@ -65,16 +70,19 @@ namespace WebLogger
         }
 
 
-        private static bool isLoggerWatching = false;
+
+
+
+        private static bool _isLoggerWatching = false;
         public static void InitLogger(FileInfo configFile)
         {
-            if (!isLoggerWatching)
+            if (!_isLoggerWatching)
             {
                 if (configFile != null)
                 {
                     log4net.Config.XmlConfigurator.ConfigureAndWatch(configFile);
 
-                    isLoggerWatching = true;
+                    _isLoggerWatching = true;
                 }
             }
         }
@@ -126,16 +134,16 @@ namespace WebLogger
             Weixin = 2
         }
 
-    
+
 
         /// <summary>
         /// 调试
         /// </summary>
-        public static void debug()
+        public static void DebugLog4()
         {
             if (log.IsDebugEnabled)
             {
-                log.Debug(message);
+                log.Debug(_message);
             }
         }
 
@@ -143,13 +151,15 @@ namespace WebLogger
         /// <summary>
         /// 错误
         /// </summary>
-        public static void error()
+        public static void ErrorLog4()
         {
             if (log.IsErrorEnabled)
             {
-                log.Error(message);
-                var mongo =new  MongoCurd<LogMessage>();
-                mongo.Insert(message);
+
+                log.Error(_message);
+                //保存数据
+                var mongo = new MongoCurd<LogMessage>();
+                mongo.Insert(_message);
                 //MongoHelper.InsertOne(message);
             }
         }
@@ -157,23 +167,23 @@ namespace WebLogger
         /// <summary>
         /// 严重错误
         /// </summary>
-        public static void fatal()
+        public static void FatalLog4()
         {
             if (log.IsFatalEnabled)
             {
-                log.Fatal(message);
+                log.Fatal(_message);
             }
         }
 
         /// <summary>
         /// 记录一般日志
         /// </summary>
-        public static void info()
+        public static void InfoLog4()
         {
             if (log.IsInfoEnabled)
             {
                 //log.Info("Jerry");
-                log.Info(message);
+                log.Info(_message);
             }
         }
 
@@ -181,46 +191,69 @@ namespace WebLogger
         /// <summary>
         /// 记录警告
         /// </summary>
-        public static void warn()
+        public static void WarnLog4()
         {
             if (log.IsWarnEnabled)
             {
-                log.Warn(message);
+                log.Warn(_message);
             }
         }
 
 
         /// <summary>  
         /// 需要写日志的地方调用此方法  
-        /// </summary>  
-        /// <param name="level">自定义级别</param>  
-        public static void SaveMessage(LogMessage logMessage, LevelEnum level)
+        /// </summary>
+        /// <param name="logMessage">日志内容</param>
+        /// <param name="userName"></param>
+        /// <param name="level">自定义级别</param>
+        /// <param name="msg"></param>
+        /// <param name="ex"></param>
+        /// <param name="userId"></param>  
+        public static void SaveMessage(string msg, string ex, int userId, string userName, LevelEnum level)
         {
-            message = logMessage;
+            _message = LogMessage(msg, ex, userId, userName);
 
             switch (level)
             {
                 case LevelEnum.Info:
-                    info();
+                    InfoLog4();
                     break;
 
                 case LevelEnum.Warn:
-                    warn();
+                    WarnLog4();
                     break;
 
                 case LevelEnum.Eror:
-                    error();
+                    ErrorLog4();
                     break;
 
                 case LevelEnum.Fatal:
-                    fatal();
+                    FatalLog4();
                     break;
 
                 default: break;
             }
         }
 
+
+        public static LogMessage LogMessage(string message, string ex, int userId, string userName)
+        {
+            var obj = new LogMessage
+            {
+                LevelName = LogHelper.LevelEnum.Eror.ToString(),
+                Message = message,
+                Exception = ex,
+                SenderWay = LogHelper.SenderEnum.EMail.ToString(),
+                State = (int)LogHelper.LogerEnum.Normal,
+                UserId = userId,
+                UserName = userName,
+                IpAddress = IpAddressHelper.GetClientIp(),
+                RecordTime = DateTime.Now,//) DateTime.UtcNow.ToLocalTime(),
+            };
+            return obj;
+        }
+
     }
 
-    
+
 }

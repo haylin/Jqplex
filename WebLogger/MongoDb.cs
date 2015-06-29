@@ -20,7 +20,6 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using MongoDB;
-using MongoDB.Driver;
 
 
 namespace WebLogger
@@ -28,8 +27,8 @@ namespace WebLogger
     public class MongoDb : IDisposable
     {
 
-        private static readonly string DbSource = "server=182.92.103.4:9388";
-        private const string DbName = "WebLoger";
+        private static readonly string DbSource = ConfigurationManager.AppSettings["MongoDbSource"];
+        private static readonly string DbName = ConfigurationManager.AppSettings["MongoDb"];
        
         private Mongo _mongo;
         private IMongoDatabase _db;

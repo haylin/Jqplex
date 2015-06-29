@@ -54,6 +54,19 @@ namespace WebLogger
         }
     }
 
+    /// <summary>
+    /// 消息内容
+    /// </summary>
+    internal sealed class MessagePatternConverter : PatternLayoutConverter
+    {
+        override protected void Convert(TextWriter writer, LoggingEvent loggingEvent)
+        {
+            LogMessage logMessage = loggingEvent.MessageObject as LogMessage;
+
+            if (logMessage != null)
+                writer.Write(logMessage.Message);
+        }
+    }
 
     /// <summary>
     /// 异常信息

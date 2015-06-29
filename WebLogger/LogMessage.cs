@@ -21,6 +21,7 @@ using System.Text;
 
 namespace WebLogger
 {
+    [Serializable]
     public class LogMessage
     {
         public LogMessage()
@@ -29,7 +30,31 @@ namespace WebLogger
             //Todo:添加构造函数
             //
         }
-        public DateTime RecordTime { get; set; }
+
+
+        //public LogMessage(string levelName, string message, string excetion, string userName, string senderWay,int state)
+        //{
+        //    LevelName = LevelName == null ?  levelName : LogHelper.LevelEnum.All.ToString();
+
+        //    IpAddress = IpAddressHelper.GetClientIp();
+
+        //    Message = message;
+
+        //    Exception = excetion;
+
+        //    UserName = userName;
+
+        //    SenderWay = senderWay ?? LogHelper.SenderEnum.EMail.ToString();
+
+        //    State = State == 0 ? (int)LogHelper.LogerEnum.Normal : state;
+
+        //}
+
+
+
+
+
+        public DateTime RecordTime { get;set ;}
 
         public string LevelName { get; set; }
 
@@ -43,6 +68,6 @@ namespace WebLogger
         public string UserName { get; set; }
         public string SenderWay { get; set; }
         public int State { get; set; }
-   
+
     }
 }

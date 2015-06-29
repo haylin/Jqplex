@@ -45,6 +45,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,14 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomLayout .cs" />
+    <Compile Include="IpAddressHelper.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="MongoCURD.cs" />
     <Compile Include="MongoDb.cs" />
-    <Compile Include="MongoHelper.cs" />
     <Compile Include="PagerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessagePatternConverter.cs" />
     <Compile Include="CustomPatternConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
