@@ -10,11 +10,11 @@ namespace CustomLayout
     {
         public static FileInfo GetConfigFile()
         {
-            string filePath = System.Configuration.ConfigurationManager.AppSettings["logConfigFile"];
-            if (string.IsNullOrEmpty(filePath))
-            {
-                filePath = "Web.config";
-            }
+            string filePath = "Config/log4.config";//System.Configuration.ConfigurationManager.AppSettings["logConfigFile"];
+            //if (string.IsNullOrEmpty(filePath))
+            //{
+            //    filePath = "Web.config";
+            //}
             filePath = System.Web.HttpContext.Current.Server.MapPath(filePath);
 
             if (File.Exists(filePath))
