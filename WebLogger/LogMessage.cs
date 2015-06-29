@@ -32,28 +32,6 @@ namespace WebLogger
         }
 
 
-        //public LogMessage(string levelName, string message, string excetion, string userName, string senderWay,int state)
-        //{
-        //    LevelName = LevelName == null ?  levelName : LogHelper.LevelEnum.All.ToString();
-
-        //    IpAddress = IpAddressHelper.GetClientIp();
-
-        //    Message = message;
-
-        //    Exception = excetion;
-
-        //    UserName = userName;
-
-        //    SenderWay = senderWay ?? LogHelper.SenderEnum.EMail.ToString();
-
-        //    State = State == 0 ? (int)LogHelper.LogerEnum.Normal : state;
-
-        //}
-
-
-
-
-
         public DateTime RecordTime { get;set ;}
 
         public string LevelName { get; set; }
